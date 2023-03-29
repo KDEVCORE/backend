@@ -7,11 +7,11 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
   - Member: 회원 등록된 계정
   - Guest: 임시 허용 사용자
 - Skills
-  - RESTful API
+  - RESTful API  
     URL Mapping(GET, POST, PUT, DELETE)
-  - Spring Seurity
+  - Spring Seurity  
     인증(Authentication), 권한 부여(Authorization) 처리
-  - Spring Data JPA
+  - Spring Data JPA  
     데이터 CRUD 처리
 
 ## Deployment
