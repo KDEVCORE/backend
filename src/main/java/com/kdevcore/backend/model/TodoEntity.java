@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "Todo") // name 규정, @Table 없으면 @Entity, 없으면 class name
+@Table(name = "Todo")
 public class TodoEntity {
     @Id
     @GeneratedValue(generator="system-uuid") // ID 자동 생성, 기본 Generator: INCREMENTAL, SEQUENCE, IDENTITY
