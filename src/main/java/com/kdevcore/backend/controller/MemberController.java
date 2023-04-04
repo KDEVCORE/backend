@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdevcore.backend.dto.UserDTO;
-import com.kdevcore.backend.model.UserEntity;
+import com.kdevcore.backend.dto.MemberDTO;
+import com.kdevcore.backend.model.MemberEntity;
 import com.kdevcore.backend.security.TokenProvider;
-import com.kdevcore.backend.service.UserService;
+import com.kdevcore.backend.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("auth")
+@RequestMapping("member")
 public class MemberController {
     @Autowired
-    private UserService userService;
+    private MemberService memberService;
     @Autowired
     private TokenProvider tokenProvider;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Bean으로 작성해도 됨
 
     @PostMapping("signup")
-    public ResponseEntity<?> registerUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> registerUser(@RequestBody MemberDTO memberDTO) {
         try {
-            if(userDTO == null || userDTO.getPassword() == null) throw new RuntimeException("Invalid Password value");
-            UserEntity user = UserEntity.builder().username(userDTO.getUsername()).password(passwordEncoder.encode(userDTO.getPassword())).build();
-            UserEntity registeredUser = userService.create(user);
-            UserDTO responseUserDTO = UserDTO.builder().id(registeredUser.getId()).username(registeredUser.getUsername()).build();
+            if(memberDTO == null || memberDTO.getPassword() == null) throw new RuntimeException("Invalid Password value");
+            MemberEntity user = MemberEntity.builder().username(memberDTO.getUsername()).password(passwordEncoder.encode(memberDTO.getPassword())).build();
+            MemberEntity registeredUser = memberService.create(user);
+            MemberDTO responseUserDTO = MemberDTO.builder().id(registeredUser.getId()).username(registeredUser.getUsername()).build();
             return ResponseEntity.ok().body(responseUserDTO);
         } catch(Exception e) {
             String msg = "Member registration failed: " + e.getMessage();
@@ -42,11 +42,11 @@ public class MemberController {
     }
 
     @PostMapping("signin")
-    public ResponseEntity<?> authenticate(@RequestBody UserDTO userDTO) {
-        UserEntity user = userService.getByCredentials(userDTO.getUsername(), userDTO.getPassword(), passwordEncoder);
+    public ResponseEntity<?> authenticate(@RequestBody MemberDTO memberDTO) {
+        MemberEntity user = memberService.getByCredentials(memberDTO.getUsername(), memberDTO.getPassword(), passwordEncoder);
         if(user != null) {
             final String token = tokenProvider.create(user);
-            final UserDTO responseUserDTO = UserDTO.builder().username(user.getUsername()).id(user.getId()).token(token).build();
+            final MemberDTO responseUserDTO = MemberDTO.builder().username(user.getUsername()).id(user.getId()).token(token).build();
             return ResponseEntity.ok().body(responseUserDTO);
         } else {
             String msg = "Member sign-in failed.";

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kdevcore.backend.model.UserEntity;
-import com.kdevcore.backend.persistence.UserRepository;
+import com.kdevcore.backend.model.MemberEntity;
+import com.kdevcore.backend.persistence.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
     @Autowired
-    private UserRepository userRepository;
+    private MemberRepository memberRepository;
     
     public OAuthUserServiceImpl() {
         super();
@@ -34,14 +34,14 @@ public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
         }
         final String username = oAuth2User.getAttributes().get("login").toString();
         final String authProvider = userRequest.getClientRegistration().getClientName();
-        UserEntity userEntity = null;
-        if(!userRepository.existsByUsername(username)) {
-            userEntity = UserEntity.builder().username(username).authProvider(authProvider).build();
-            userEntity = userRepository.save(userEntity);
+        MemberEntity memberEntity = null;
+        if(!memberRepository.existsByUsername(username)) {
+            memberEntity = MemberEntity.builder().username(username).authProvider(authProvider).build();
+            memberEntity = memberRepository.save(memberEntity);
         } else {
-            userEntity = userRepository.findByUsername(username);
+            memberEntity = memberRepository.findByUsername(username);
         }
         log.info("Successfully pulled user info: username {}, authProvider: {}", username, authProvider);
-        return new ApplicationOAuth2User(userEntity.getId(), oAuth2User.getAttributes());
+        return new ApplicationOAuth2User(memberEntity.getId(), oAuth2User.getAttributes());
     }
 }

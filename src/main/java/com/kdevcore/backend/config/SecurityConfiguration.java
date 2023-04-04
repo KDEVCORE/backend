@@ -32,13 +32,13 @@ public class SecurityConfiguration {
         http.cors((cors) -> cors.and())
             .csrf((csrf) -> csrf.disable())
             .httpBasic((basic) -> basic.disable())
-            .sessionManagement((sess) -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and())
-            .authorizeHttpRequests((authz) -> authz.antMatchers("/", "/auth/**", "/oauth2/**").permitAll().anyRequest().authenticated().and())
+            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and())
+            .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/member/**", "/oauth2/**").permitAll().anyRequest().authenticated().and())
             .oauth2Login((oauth) -> oauth.redirectionEndpoint().baseUri("/oauth2/callback/*").and()
-                                        .authorizationEndpoint().baseUri("/auth/authorize").and()
+                                        .authorizationEndpoint().baseUri("/member/authorize").and()
                                         .userInfoEndpoint().userService(oAuthUserServiceImpl).and()
                                         .successHandler(oAuthSuccessHandler).and())
-            .exceptionHandling((ex) -> ex.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
+            .exceptionHandling((exception) -> exception.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
         http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
         http.addFilterBefore(redirectUrlCookieFilter, OAuth2AuthorizationRequestRedirectFilter.class);
         return http.build();

@@ -7,7 +7,7 @@ import java.util.Date;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.kdevcore.backend.model.UserEntity;
+import com.kdevcore.backend.model.MemberEntity;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -19,11 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 public class TokenProvider {
     private static final String SECRET_KEY = "dGhpcyBwcm9qZWN0IGlzIGZvciB3ZWIgZGV2ZWxvcG1lbnQgcmVoZWFyc2Fscy4=";
 
-    public String create(UserEntity userEntity) {
+    public String create(MemberEntity memberEntity) {
         Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
         return Jwts.builder() // JWT 생성
                     .signWith(SignatureAlgorithm.HS512, SECRET_KEY) // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
-                    .setSubject(userEntity.getId()).setIssuer("kdevcore").setIssuedAt(new Date()).setExpiration(expiryDate) // payload에 들어갈 내용
+                    .setSubject(memberEntity.getId()).setIssuer("kdevcore").setIssuedAt(new Date()).setExpiration(expiryDate) // payload에 들어갈 내용
                     .compact();
     }
 

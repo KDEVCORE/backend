@@ -19,8 +19,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
-public class UserEntity {
+@Table(name = "member", uniqueConstraints = {@UniqueConstraint(columnNames = "username")})
+public class MemberEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
