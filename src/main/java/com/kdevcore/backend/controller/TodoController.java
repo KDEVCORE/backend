@@ -20,7 +20,7 @@ import com.kdevcore.backend.model.TodoEntity;
 import com.kdevcore.backend.service.TodoService;
 
 @RestController
-@RequestMapping("todo")
+@RequestMapping("/todo")
 public class TodoController {
     @Autowired
     private TodoService todoService;

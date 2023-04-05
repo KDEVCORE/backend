@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("member")
+@RequestMapping("/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
@@ -26,7 +26,7 @@ public class MemberController {
     private TokenProvider tokenProvider;
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // Bean으로 작성해도 됨
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody MemberDTO memberDTO) {
         try {
             if(memberDTO == null || memberDTO.getPassword() == null) throw new RuntimeException("Invalid Password value");
@@ -41,7 +41,7 @@ public class MemberController {
         }
     }
 
-    @PostMapping("signin")
+    @PostMapping("/signin")
     public ResponseEntity<?> authenticate(@RequestBody MemberDTO memberDTO) {
         MemberEntity user = memberService.getByCredentials(memberDTO.getUsername(), memberDTO.getPassword(), passwordEncoder);
         if(user != null) {
