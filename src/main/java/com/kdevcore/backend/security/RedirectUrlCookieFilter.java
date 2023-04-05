@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class RedirectUrlCookieFilter extends OncePerRequestFilter {
-    public static final String REDIRECT_URI_PARAM = "redirect_url";
+    public static final String REDIRECT_URI_PARAM = "redirect_uri";
     private static final int MAX_AGE = 180;
 
     @Override
