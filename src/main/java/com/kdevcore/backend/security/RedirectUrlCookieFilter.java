@@ -21,7 +21,7 @@ public class RedirectUrlCookieFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(request.getRequestURI().startsWith("/auth/authorize")) {
+        if(request.getRequestURI().startsWith("member/authorize")) {
             try {
                 log.info("request url {}", request.getRequestURI());
                 String redirectUrl = request.getParameter(REDIRECT_URI_PARAM);

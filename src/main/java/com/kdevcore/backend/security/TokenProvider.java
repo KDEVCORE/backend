@@ -30,7 +30,7 @@ public class TokenProvider {
     public String create(final Authentication authentication) {
         ApplicationOAuth2User userPrincipal = (ApplicationOAuth2User) authentication.getPrincipal();
         Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
-        return Jwts.builder() // JWT 생성 (social sign-in)
+        return Jwts.builder() // JWT 생성 (SSO, oauth2 api)
                     .signWith(SignatureAlgorithm.HS512, SECRET_KEY) // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
                     .setSubject(userPrincipal.getName()).setIssuer("kdevcore").setIssuedAt(new Date()).setExpiration(expiryDate) // payload에 들어갈 내용
                     .compact();
