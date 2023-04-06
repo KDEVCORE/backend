@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class RedirectUrlCookieFilter extends OncePerRequestFilter {
-    public static final String REDIRECT_URI_PARAM = "redirect-url";
+    public static final String REDIRECT_URL_PARAM = "redirect-url";
     private static final int MAX_AGE = 180;
 
     @Override
@@ -24,8 +24,8 @@ public class RedirectUrlCookieFilter extends OncePerRequestFilter {
         if(request.getRequestURI().startsWith("/member/authorize")) {
             try {
                 log.info("request url {}", request.getRequestURI());
-                String redirectUrl = request.getParameter(REDIRECT_URI_PARAM);
-                Cookie cookie = new Cookie(REDIRECT_URI_PARAM, redirectUrl);
+                String redirectUrl = request.getParameter(REDIRECT_URL_PARAM);
+                Cookie cookie = new Cookie(REDIRECT_URL_PARAM, redirectUrl);
                 cookie.setPath("/");
                 cookie.setHttpOnly(true);
                 cookie.setMaxAge(MAX_AGE);

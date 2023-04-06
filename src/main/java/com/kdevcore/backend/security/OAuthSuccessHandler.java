@@ -1,6 +1,6 @@
 package com.kdevcore.backend.security;
 
-import static com.kdevcore.backend.security.RedirectUrlCookieFilter.REDIRECT_URI_PARAM;
+import static com.kdevcore.backend.security.RedirectUrlCookieFilter.REDIRECT_URL_PARAM;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         log.info("auth succeeded");
         TokenProvider tokenProvider = new TokenProvider();
         String token = tokenProvider.create(authentication);
-        Optional<Cookie> oCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals(REDIRECT_URI_PARAM)).findFirst();
+        Optional<Cookie> oCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals(REDIRECT_URL_PARAM)).findFirst();
         Optional<String> redirectUri = oCookie.map(Cookie::getValue);
 
         log.info("token: {}", token);
