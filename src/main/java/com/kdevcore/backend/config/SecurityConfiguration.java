@@ -13,7 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 import com.kdevcore.backend.security.JwtAuthenticationFilter;
 import com.kdevcore.backend.security.OAuthSuccessHandler;
 import com.kdevcore.backend.security.OAuthUserServiceImpl;
-import com.kdevcore.backend.security.RedirectUrlCookieFilter;
+import com.kdevcore.backend.security.RedirectUriCookieFilter;
 
 // Spring Seucrity 버전 업그레이드 이슈, WebSecurityConfigurerAdapter 대체, 기존의 @Override 방식에서 @Bean 객체 등록 방식으로 변경
 @Configuration
@@ -25,7 +25,7 @@ public class SecurityConfiguration {
     @Autowired
     private OAuthSuccessHandler oAuthSuccessHandler;
     @Autowired
-    private RedirectUrlCookieFilter redirectUrlCookieFilter;
+    private RedirectUriCookieFilter redirectUriCookieFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,7 +40,7 @@ public class SecurityConfiguration {
                                         .successHandler(oAuthSuccessHandler).and())
             .exceptionHandling((exception) -> exception.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
         http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
-        http.addFilterBefore(redirectUrlCookieFilter, OAuth2AuthorizationRequestRedirectFilter.class);
+        http.addFilterBefore(redirectUriCookieFilter, OAuth2AuthorizationRequestRedirectFilter.class);
         return http.build();
     }
 }
