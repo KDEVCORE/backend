@@ -32,7 +32,7 @@ public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
         } catch(JsonProcessingException e) {
             e.printStackTrace();
         }
-        final String username = oAuth2User.getAttributes().get("signin").toString();
+        final String username = oAuth2User.getAttributes().get("login").toString();
         final String authProvider = userRequest.getClientRegistration().getClientName();
         MemberEntity memberEntity = null;
         if(!memberRepository.existsByUsername(username)) {
