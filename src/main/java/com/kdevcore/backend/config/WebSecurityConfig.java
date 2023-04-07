@@ -17,7 +17,7 @@ import com.kdevcore.backend.security.RedirectUriCookieFilter;
 
 // Spring Seucrity 버전 업그레이드 이슈, WebSecurityConfigurerAdapter 대체, 기존의 @Override 방식에서 @Bean 객체 등록 방식으로 변경
 @Configuration
-public class SecurityConfiguration {
+public class WebSecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
@@ -32,12 +32,12 @@ public class SecurityConfiguration {
         http.cors((cors) -> cors.and())
             .csrf((csrf) -> csrf.disable())
             .httpBasic((basic) -> basic.disable())
-            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and())
-            .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/member/**", "/oauth2/**").permitAll().anyRequest().authenticated().and())
+            .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/member/**", "/oauth2/**").permitAll().anyRequest().authenticated())
             .oauth2Login((oauth) -> oauth.redirectionEndpoint().baseUri("/oauth2/callback/*").and()
-                                        .authorizationEndpoint().baseUri("/member/authorize").and()
-                                        .userInfoEndpoint().userService(oAuthUserServiceImpl).and()
-                                        .successHandler(oAuthSuccessHandler).and())
+                                    .authorizationEndpoint().baseUri("/member/authorize").and()
+                                    .userInfoEndpoint().userService(oAuthUserServiceImpl).and()
+                                    .successHandler(oAuthSuccessHandler))
             .exceptionHandling((exception) -> exception.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
         http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
         http.addFilterBefore(redirectUriCookieFilter, OAuth2AuthorizationRequestRedirectFilter.class);
