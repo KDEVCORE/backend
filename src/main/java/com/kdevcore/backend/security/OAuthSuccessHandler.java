@@ -34,6 +34,6 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
         log.info("token: {}", token);
         response.getWriter().write(token);
-        response.sendRedirect(redirectUri.orElseGet(() -> LOCAL_REDIRECT_URL) + "signin-oauth?token=" + token);
+        response.sendRedirect(redirectUri.orElseGet(() -> LOCAL_REDIRECT_URL) + "/signin-oauth?token=" + token);
     }
 }
