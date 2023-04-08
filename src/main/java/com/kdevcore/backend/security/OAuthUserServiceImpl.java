@@ -32,8 +32,9 @@ public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
         } catch(JsonProcessingException e) {
             e.printStackTrace();
         }
-        final String username = oAuth2User.getAttributes().get("login").toString();
         final String authProvider = userRequest.getClientRegistration().getClientName();
+        String attrKey = "github".equals(authProvider) ? "login" : "auth";
+        final String username = oAuth2User.getAttributes().get(attrKey).toString();
         MemberEntity memberEntity = null;
         if(!memberRepository.existsByUsername(username)) {
             memberEntity = MemberEntity.builder().username(username).authProvider(authProvider).build();
