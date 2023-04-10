@@ -8,13 +8,13 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
 ## Skills
 다음의 기술을 사용하여 개발합니다.
 - RESTful API  
-  URL Mapping(GET, POST, PUT, DELETE)
+URL Mapping(GET, POST, PUT, DELETE)
 - Spring Seurity  
-  인증(Authentication), 권한 부여(Authorization) 처리
+인증(Authentication), 권한 부여(Authorization) 처리
 - Spring Data JPA  
-  데이터 CRUD 처리
-- OAuth2
-  SSO 로그인
+데이터 CRUD 처리
+- OAuth2  
+SSO 로그인
 ## Deployment
 배포는 다음의 솔루션을 사용합니다.
 - AWS Elastic Beanstalk

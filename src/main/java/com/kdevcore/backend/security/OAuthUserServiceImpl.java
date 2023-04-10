@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
     @Autowired
     private MemberRepository memberRepository;
-    
+
     public OAuthUserServiceImpl() {
         super();
     }
@@ -28,14 +28,14 @@ public class OAuthUserServiceImpl extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         final OAuth2User oAuth2User = super.loadUser(userRequest);
         try {
-            log.info("OAuth2User attributes() {}", new ObjectMapper().writeValueAsString(oAuth2User.getAttributes())); // for test
-        } catch(JsonProcessingException e) {
+            log.info("OAuth2User attributes() {}", new ObjectMapper().writeValueAsString(oAuth2User.getAttributes()));
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
         final String authProvider = userRequest.getClientRegistration().getClientName();
-        final String username = oAuth2User.getAttributes().get("login").toString();
+        final String username = oAuth2User.getAttributes().toString();
         MemberEntity memberEntity = null;
-        if(!memberRepository.existsByUsername(username)) {
+        if (!memberRepository.existsByUsername(username)) {
             memberEntity = MemberEntity.builder().username(username).authProvider(authProvider).build();
             memberEntity = memberRepository.save(memberEntity);
         } else {
