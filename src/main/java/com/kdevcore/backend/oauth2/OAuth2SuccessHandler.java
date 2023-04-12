@@ -1,4 +1,4 @@
-package com.kdevcore.backend.security;
+package com.kdevcore.backend.oauth2;
 
 import static com.kdevcore.backend.security.RedirectUriCookieFilter.REDIRECT_URI_PARAM;
 
@@ -14,13 +14,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.kdevcore.backend.security.JwtProvider;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
 @AllArgsConstructor
-public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private static final String LOCAL_REDIRECT_URL = "http://localhost:3000";
 
     @Override

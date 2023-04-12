@@ -10,8 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.web.filter.CorsFilter;
 
+import com.kdevcore.backend.oauth2.OAuth2SuccessHandler;
 import com.kdevcore.backend.security.JwtAuthenticationFilter;
-import com.kdevcore.backend.security.OAuthSuccessHandler;
 import com.kdevcore.backend.security.RedirectUriCookieFilter;
 import com.kdevcore.backend.service.CustomOAuth2UserService;
 
@@ -23,7 +23,7 @@ public class WebSecurityConfig {
     @Autowired
     private CustomOAuth2UserService customOAuth2UserService;
     @Autowired
-    private OAuthSuccessHandler oAuthSuccessHandler;
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
     @Autowired
     private RedirectUriCookieFilter redirectUriCookieFilter;
 
@@ -37,7 +37,7 @@ public class WebSecurityConfig {
             .oauth2Login((oauth) -> oauth.redirectionEndpoint().baseUri("/oauth2/callback/*").and()
                                     .authorizationEndpoint().baseUri("/oauth2/authorization").and()
                                     .userInfoEndpoint().userService(customOAuth2UserService).and()
-                                    .successHandler(oAuthSuccessHandler))
+                                    .successHandler(oAuth2SuccessHandler))
             .exceptionHandling((exception) -> exception.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
         http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);
         http.addFilterBefore(redirectUriCookieFilter, OAuth2AuthorizationRequestRedirectFilter.class);
