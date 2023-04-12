@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdevcore.backend.dto.UserDTO;
-import com.kdevcore.backend.enums.Provider;
 import com.kdevcore.backend.enums.Role;
-import com.kdevcore.backend.model.MemberEntity;
 import com.kdevcore.backend.model.UserEntity;
 import com.kdevcore.backend.security.JwtProvider;
 import com.kdevcore.backend.service.MemberService;
