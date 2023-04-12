@@ -40,6 +40,16 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     }
 
     @Override
+    public String getName() {
+        return identifier;
+    }
+
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
     public String getUsername() {
         return email;
     }
@@ -72,15 +82,5 @@ public class UserPrincipal implements OAuth2User, UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return String.valueOf(identifier);
     }
 }
