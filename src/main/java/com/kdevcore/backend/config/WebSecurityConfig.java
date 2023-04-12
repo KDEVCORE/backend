@@ -12,8 +12,8 @@ import org.springframework.web.filter.CorsFilter;
 
 import com.kdevcore.backend.security.JwtAuthenticationFilter;
 import com.kdevcore.backend.security.OAuthSuccessHandler;
-import com.kdevcore.backend.security.OAuthUserServiceImpl;
 import com.kdevcore.backend.security.RedirectUriCookieFilter;
+import com.kdevcore.backend.service.CustomOAuth2UserService;
 
 // Spring Seucrity 버전 업그레이드 이슈, WebSecurityConfigurerAdapter 대체, 기존의 @Override 방식에서 @Bean 객체 등록 방식으로 변경
 @Configuration
@@ -21,7 +21,7 @@ public class WebSecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
     @Autowired
-    private OAuthUserServiceImpl oAuthUserServiceImpl;
+    private CustomOAuth2UserService customOAuth2UserService;
     @Autowired
     private OAuthSuccessHandler oAuthSuccessHandler;
     @Autowired
@@ -36,7 +36,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/member/**", "/oauth2/**").permitAll().anyRequest().authenticated())
             .oauth2Login((oauth) -> oauth.redirectionEndpoint().baseUri("/oauth2/callback/*").and()
                                     .authorizationEndpoint().baseUri("/oauth2/authorization").and()
-                                    .userInfoEndpoint().userService(oAuthUserServiceImpl).and()
+                                    .userInfoEndpoint().userService(customOAuth2UserService).and()
                                     .successHandler(oAuthSuccessHandler))
             .exceptionHandling((exception) -> exception.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));
         http.addFilterAfter(jwtAuthenticationFilter, CorsFilter.class);

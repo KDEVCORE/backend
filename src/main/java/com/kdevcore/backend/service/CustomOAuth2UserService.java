@@ -18,7 +18,7 @@ import com.kdevcore.backend.oauth2.UserPrincipal;
 import com.kdevcore.backend.persistence.UserRepository;
 
 @Service
-public class UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     @Autowired
     private UserRepository userRepository;
 

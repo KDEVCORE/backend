@@ -30,4 +30,8 @@ public class MemberService {
         if(originalMember != null && encoder.matches(password, originalMember.getPassword())) return originalMember;
         return null;
     }
+
+    public UserEntity isValidIdentifier(final String identifier) {
+        return userRepository.findByIdentifier(identifier);
+    }
 }

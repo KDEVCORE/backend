@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = "uuid")})
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class UserEntity extends BaseDateTimeEntity {
     @Id
     @GeneratedValue(generator = "system-uuid")

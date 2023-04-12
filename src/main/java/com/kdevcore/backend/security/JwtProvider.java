@@ -7,7 +7,6 @@ import java.util.Date;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import com.kdevcore.backend.model.MemberEntity;
 import com.kdevcore.backend.model.UserEntity;
 import com.kdevcore.backend.oauth2.OAuth2UserInfo;
 
