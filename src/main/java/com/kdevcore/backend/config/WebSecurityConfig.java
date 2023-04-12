@@ -35,7 +35,7 @@ public class WebSecurityConfig {
             .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/member/**", "/oauth2/**").permitAll().anyRequest().authenticated())
             .oauth2Login((oauth) -> oauth.redirectionEndpoint().baseUri("/oauth2/callback/*").and()
-                                    .authorizationEndpoint().baseUri("/member/authorize").and()
+                                    .authorizationEndpoint().baseUri("/oauth2/authorization").and()
                                     .userInfoEndpoint().userService(oAuthUserServiceImpl).and()
                                     .successHandler(oAuthSuccessHandler))
             .exceptionHandling((exception) -> exception.authenticationEntryPoint(new Http403ForbiddenEntryPoint()));

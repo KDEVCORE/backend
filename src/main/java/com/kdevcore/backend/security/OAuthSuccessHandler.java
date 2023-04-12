@@ -27,8 +27,8 @@ public class OAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException {
         log.info("auth succeeded");
-        TokenProvider tokenProvider = new TokenProvider();
-        String token = tokenProvider.create(authentication);
+        JwtProvider jwtProvider = new JwtProvider();
+        String token = jwtProvider.create(authentication);
         Optional<Cookie> oCookie = Arrays.stream(request.getCookies()).filter(cookie -> cookie.getName().equals(REDIRECT_URI_PARAM)).findFirst();
         Optional<String> redirectUri = oCookie.map(Cookie::getValue);
 
