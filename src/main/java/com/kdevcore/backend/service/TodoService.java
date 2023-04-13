@@ -20,24 +20,26 @@ public class TodoService {
     public List<TodoEntity> create(final TodoEntity entity) {
         validate(entity);
         todoRepository.save(entity);
-        log.info("Entity Id: {} is saved.", entity.getId());
-        return todoRepository.findByUserId(entity.getUserId());
+        log.info("Entity Id: {} is saved.", entity.getUserIdentifier());
+        return todoRepository.findByUserIdentifier(entity.getUserIdentifier());
     }
 
-    public List<TodoEntity> retrieve(final String userId) {
+    public List<TodoEntity> retrieve(final String userIdentifier) {
         log.info("Todo retrieve");
-        return todoRepository.findByUserId(userId);
+        return todoRepository.findByUserIdentifier(userIdentifier);
     }
 
     public List<TodoEntity> update(final TodoEntity entity) {
         validate(entity);
-        final Optional<TodoEntity> original = todoRepository.findById(entity.getId());
+        final Optional<TodoEntity> original = todoRepository.findByUuid(entity.getUuid());
         original.ifPresent((todo) -> {
-            todo.setTitle(entity.getTitle());
-            todo.setDone(entity.isDone());
-            todoRepository.save(todo); // 데이터베이스 반영
+            todoRepository.save(todo.builder()
+                                    .title(entity.getTitle())
+                                    .progress(entity.getProgress())
+                                    .done(entity.isDone())
+                                    .build()); // 데이터베이스 반영
         });
-        return retrieve(entity.getUserId());
+        return retrieve(entity.getUserIdentifier());
     }
 
     public List<TodoEntity> delete(final TodoEntity entity) {
@@ -45,11 +47,11 @@ public class TodoService {
         try {
             todoRepository.delete(entity);
         } catch(Exception e) {
-            String msg = "error deleting entity: " + entity.getId();
+            String msg = "error deleting entity: " + entity.getUuid();
             log.error(msg, e);
             throw new RuntimeException(msg);
         }
-        return retrieve(entity.getUserId());
+        return retrieve(entity.getUserIdentifier());
     }
 
     private void validate(final TodoEntity entity) {
@@ -59,7 +61,7 @@ public class TodoService {
             log.warn(msg);
             throw new RuntimeException(msg);
         }
-        if(entity.getUserId() == null) {
+        if(entity.getUserIdentifier() == null) {
             msg = "Unknown user.";
             log.warn(msg);
             throw new RuntimeException(msg);

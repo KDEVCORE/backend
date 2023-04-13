@@ -9,21 +9,20 @@ import org.hibernate.annotations.GenericGenerator;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "todo")
-public class TodoEntity {
+public class TodoEntity extends BaseDateTimeEntity {
     @Id
     @GeneratedValue(generator="system-uuid") // ID 자동 생성, 기본 Generator: INCREMENTAL, SEQUENCE, IDENTITY
     @GenericGenerator(name="system-uuid", strategy = "uuid") // Custom Generator 설정
-    private String id;
-    private String userId;
+    private String uuid;
+    private String userIdentifier;
     private String title;
     private Integer progress;
     private boolean done;
