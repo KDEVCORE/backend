@@ -8,7 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.kdevcore.backend.model.UserEntity;
-import com.kdevcore.backend.oauth2.OAuth2UserInfo;
+import com.kdevcore.backend.oauth2.UserPrincipal;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -24,16 +24,22 @@ public class JwtProvider {
         Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
         return Jwts.builder() // JWT 생성
                     .signWith(SignatureAlgorithm.HS512, SECRET_KEY) // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
-                    .setSubject(userEntity.getUuid()).setIssuer("kdevcore").setIssuedAt(new Date()).setExpiration(expiryDate) // payload에 들어갈 내용
+                    .setSubject(userEntity.getUuid()) // payload에 들어갈 내용
+                        .setIssuer("kdevcore")
+                        .setIssuedAt(new Date())
+                        .setExpiration(expiryDate)
                     .compact();
     }
 
     public String create(final Authentication authentication) {
-        OAuth2UserInfo oAuth2UserInfo = (OAuth2UserInfo) authentication.getPrincipal();
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         Date expiryDate = Date.from(Instant.now().plus(1, ChronoUnit.DAYS));
-        return Jwts.builder() // JWT 생성 (SSO, oauth2 api)
+        return Jwts.builder() // JWT 생성 (OAuth2)
                     .signWith(SignatureAlgorithm.HS512, SECRET_KEY) // header에 들어갈 내용 및 서명을 하기 위한 SECRET_KEY
-                    .setSubject(oAuth2UserInfo.getIdentifier()).setIssuer("kdevcore").setIssuedAt(new Date()).setExpiration(expiryDate) // payload에 들어갈 내용
+                    .setSubject(userPrincipal.getIdentifier()) // payload에 들어갈 내용
+                        .setIssuer("kdevcore")
+                        .setIssuedAt(new Date())
+                        .setExpiration(expiryDate)
                     .compact();
     }
 

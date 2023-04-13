@@ -17,6 +17,9 @@ import com.kdevcore.backend.oauth2.OAuth2UserInfoFactory;
 import com.kdevcore.backend.oauth2.UserPrincipal;
 import com.kdevcore.backend.persistence.UserRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     @Autowired
@@ -31,6 +34,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     protected OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest, OAuth2User oAuth2User) {
         Provider provider = Provider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId().toUpperCase());
+        log.info("Authentication Provioder: " + provider + ", OAuth2User: " + oAuth2User.toString());
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(provider, oAuth2User.getAttributes());
 
         if(!StringUtils.hasText(oAuth2UserInfo.getEmail())) throw new RuntimeException("Email not found from OAuth2 provider");

@@ -4,12 +4,8 @@ import java.util.Map;
 
 import com.kdevcore.backend.enums.Provider;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class OAuth2UserInfoFactory {
     public static OAuth2UserInfo getOAuth2UserInfo(Provider provider, Map<String, Object> attributes) {
-        log.info("Authentication provider: " + provider);
         switch(provider) {
             case GOOGLE: return new GoogleOAuth2User(attributes);
             case KAKAO: return new KakaoOAuth2User(attributes);

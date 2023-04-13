@@ -2,13 +2,16 @@ package com.kdevcore.backend.oauth2;
 
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-@Getter
-@AllArgsConstructor
 public abstract class OAuth2UserInfo {
     protected Map<String, Object> attributes;
+
+    public OAuth2UserInfo(Map<String, Object> attributes) {
+        this.attributes = attributes;
+    }
+
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
 
     public abstract String getIdentifier();
     public abstract String getName();
