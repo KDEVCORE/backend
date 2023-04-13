@@ -30,7 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = parseBearerToken(request);
-            log.info("Filter is running...");
+            log.info("Filter is running... - token test: {}", token);
             if (token != null && !token.equalsIgnoreCase("null")) {
                 String userIdentifier = jwtProvider.validateAndGetUserId(token);
                 log.info("Autenticated user ID: " + userIdentifier);

@@ -39,14 +39,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         if(!StringUtils.hasText(oAuth2UserInfo.getEmail())) throw new RuntimeException("Email not found from OAuth2 provider");
 
-        UserEntity user = userRepository.findByEmail(oAuth2UserInfo.getEmail()).orElse(null);
-
-        if(user != null) { // already exists
-            if(!user.getProvider().equals(provider)) throw new RuntimeException("Email alread signed up");
-            user = updateUser(user, oAuth2UserInfo);
-        } else {
-            user = registerUser(provider, oAuth2UserInfo);
-        }
+        UserEntity user = userRepository.findByIdentifier(oAuth2UserInfo.getIdentifier());
+        user = (user != null) ? updateUser(user, oAuth2UserInfo) : registerUser(provider, oAuth2UserInfo); // already exists or new user
         return UserPrincipal.create(user, oAuth2UserInfo.getAttributes());
     }
 
