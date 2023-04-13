@@ -44,7 +44,6 @@ public class MemberController {
                                                                          .role(Role.ROLE_MEMBER)
                                                                          .build());
             UserDTO responseUserDTO = UserDTO.builder()
-                                             .uuid(registeredUser.getUuid())
                                              .name(registeredUser.getName())
                                              .email(registeredUser.getEmail())
                                              .build();
@@ -64,7 +63,6 @@ public class MemberController {
             log.info("Create token, user info: {}", user.toString());
             final String token = jwtProvider.create(user);
             final UserDTO responseUserDTO = UserDTO.builder()
-                                                   .uuid(user.getUuid())
                                                    .identifier(user.getIdentifier())
                                                    .token(token).build();
             return ResponseEntity.ok().body(responseUserDTO);
