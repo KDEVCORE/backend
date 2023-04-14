@@ -44,6 +44,7 @@ public class MemberController {
                                                                          .role(Role.ROLE_MEMBER)
                                                                          .build());
             UserDTO responseUserDTO = UserDTO.builder()
+                                             .identifier(registeredUser.getIdentifier())
                                              .name(registeredUser.getName())
                                              .email(registeredUser.getEmail())
                                              .build();
