@@ -4,7 +4,7 @@ Web 개발 목적의 실습을 위한 프로젝트입니다. Back-End에서 인�
 다음의 요구사항을 만족합니다.
 - User Classification
   - Member: 회원 등록된 계정
-  - Guest: 임시 허용 사용자
+  - Partner: SSO 로그인 회원
 ## Skills
 다음의 기술을 사용하여 개발합니다.
 - RESTful API  
@@ -18,3 +18,8 @@ SSO 로그인
 ## Deployment
 배포는 다음의 솔루션을 사용합니다.
 - AWS Elastic Beanstalk
+
+## Result
+- URL
+  - Back-End: https://api.kdevcore.com/swagger-ui/index.html
+  - Front-End: https://app.kdevcore.com
