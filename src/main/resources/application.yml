@@ -2,3 +2,16 @@ spring:
   profiles:
     include:
     - oauth
+
+# Swagger (Springdoc)
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    version: 0.1.230414
+    operations-sorter: alpha
+    tags-sorter: alpha
+    display-request-duration: true
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
