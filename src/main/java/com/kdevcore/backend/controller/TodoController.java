@@ -19,14 +19,17 @@ import com.kdevcore.backend.dto.TodoDTO;
 import com.kdevcore.backend.model.TodoEntity;
 import com.kdevcore.backend.service.TodoService;
 
-// @Tag(name = "Todo")
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "Todo")
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
     @Autowired
     private TodoService todoService;
     
-    // @Operation(summary = "Todo item registration process handling", description = "할 일 목록 추가 처리")
+    @Operation(summary = "Todo item registration process handling", description = "할 일 목록 추가 처리")
     @PostMapping
     public ResponseEntity<?> createTodo(@AuthenticationPrincipal String userIdentifier, @RequestBody TodoDTO dto) {
         try {
@@ -43,7 +46,7 @@ public class TodoController {
         }
     }
 
-    // @Operation(summary = "Todo item list get process handling", description = "할 일 목록 조회 처리")
+    @Operation(summary = "Todo item list get process handling", description = "할 일 목록 조회 처리")
     @GetMapping
     public ResponseEntity<?> retrieveTodoList(@AuthenticationPrincipal String userIdentifier) {
         List<TodoEntity> entities = todoService.retrieve(userIdentifier);
@@ -52,7 +55,7 @@ public class TodoController {
         return ResponseEntity.ok().body(response);
     }
 
-    // @Operation(summary = "Todo item modification process handling", description = "할 일 목록 수정 처리")
+    @Operation(summary = "Todo item modification process handling", description = "할 일 목록 수정 처리")
     @PutMapping
     public ResponseEntity<?> updateTodo(@AuthenticationPrincipal String userIdentifier, @RequestBody TodoDTO dto) {
         dto.setUserIdentifier(userIdentifier);
@@ -63,7 +66,7 @@ public class TodoController {
         return ResponseEntity.ok().body(response);
     }
     
-    // @Operation(summary = "Todo item removal process handling", description = "할 일 목록 삭제 처리")
+    @Operation(summary = "Todo item removal process handling", description = "할 일 목록 삭제 처리")
     @DeleteMapping
     public ResponseEntity<?> deleteTodo(@AuthenticationPrincipal String userIdentifier, @RequestBody TodoDTO dto) {
         try {
