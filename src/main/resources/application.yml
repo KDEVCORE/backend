@@ -2,9 +2,3 @@ spring:
   profiles:
     include:
     - oauth
-
-# Swagger (Springdoc)
-springdoc:
-  swagger-ui:
-    version: 0.1.230414
-    
