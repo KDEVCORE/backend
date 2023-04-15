@@ -77,10 +77,10 @@ public class MemberController {
     }
 
     @Operation(summary = "Member ID duplicate check", description = "가입하려는 아이디 중복 확인")
-    @GetMapping("/id-check")
-    public Boolean checkDuplication(@RequestBody UserDTO userDTO) {
+    @PostMapping("/id-check")
+    public ResponseEntity<?> checkDuplication(@RequestBody UserDTO userDTO) {
         Boolean check = memberService.isValidIdentifier(userDTO.getIdentifier());
-        log.info("target: {}, result: {} (true ? It is exist : It does not exist)", userDTO.getIdentifier(), check);
-        return !check;
+        log.info("target: {}, result: {}", userDTO.getIdentifier(), check ? "It is exist" : "It does not exist");
+        return ResponseEntity.ok().body(check);
     }
 }
