@@ -31,7 +31,7 @@ public class MemberService {
         return null;
     }
 
-    public UserEntity isValidIdentifier(final String identifier) {
-        return userRepository.findByIdentifier(identifier);
+    public Boolean isValidIdentifier(final String identifier) {
+        return userRepository.existsByIdentifier(identifier);
     }
 }

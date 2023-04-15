@@ -1,18 +1,15 @@
 package com.kdevcore.backend.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kdevcore.backend.dto.ResponseDTO;
 import com.kdevcore.backend.dto.UserDTO;
 import com.kdevcore.backend.enums.Role;
 import com.kdevcore.backend.model.UserEntity;
@@ -80,13 +77,10 @@ public class MemberController {
     }
 
     @Operation(summary = "Member ID duplicate check", description = "가입하려는 아이디 중복 확인")
-    @PostMapping("/id-check")
-    public ResponseEntity<?> checkDuplication(@RequestBody UserDTO userDTO) {
-        log.info("id-check target: {}", userDTO.getIdentifier());
-        UserEntity user = memberService.isValidIdentifier(userDTO.getIdentifier());
-        List<Boolean> temp = new ArrayList<>();
-        temp.add(user == null ? true : false);
-        ResponseDTO<Boolean> response = ResponseDTO.<Boolean>builder().data(temp).build();
-        return ResponseEntity.ok().body(response);
+    @GetMapping("/id-check")
+    public Boolean checkDuplication(@RequestBody UserDTO userDTO) {
+        Boolean check = memberService.isValidIdentifier(userDTO.getIdentifier());
+        log.info("target: {}, result: {} (true ? It is exist : It does not exist)", userDTO.getIdentifier(), check);
+        return !check;
     }
 }
