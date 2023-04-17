@@ -33,13 +33,15 @@ public class TodoService {
         validate(entity);
         final Optional<TodoEntity> original = todoRepository.findByUuid(entity.getUuid());
         if(original.isPresent()) {
-            todoRepository.save(TodoEntity.builder()
-                                    .uuid(entity.getUuid())
-                                    .userIdentifier(entity.getUserIdentifier())
-                                    .title(entity.getTitle())
-                                    .progress(entity.getProgress())
-                                    .done(entity.isDone())
-                                    .build()); // 데이터베이스 반영
+            todoRepository.save(
+                TodoEntity.builder()
+                    .uuid(entity.getUuid())
+                    .userIdentifier(entity.getUserIdentifier())
+                    .title(entity.getTitle())
+                    .done(entity.getDone())
+                    .progress(entity.getProgress())
+                    .stresss(entity.getStresss())
+                    .build()); // 데이터베이스 반영
         }
         return retrieve(entity.getUserIdentifier());
     }

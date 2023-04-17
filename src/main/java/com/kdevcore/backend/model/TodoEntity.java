@@ -1,5 +1,7 @@
 package com.kdevcore.backend.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,6 +25,8 @@ public class TodoEntity extends BaseDateTimeEntity {
     private String uuid;
     private String userIdentifier;
     private String title;
+    private Boolean done;
     private Integer progress;
-    private boolean done;
+    private Integer stresss;
+    private LocalDateTime deadline;
 }

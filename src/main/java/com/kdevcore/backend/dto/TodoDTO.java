@@ -1,5 +1,7 @@
 package com.kdevcore.backend.dto;
 
+import java.time.LocalDateTime;
+
 import com.kdevcore.backend.model.TodoEntity;
 
 import lombok.AllArgsConstructor;
@@ -13,24 +15,34 @@ public class TodoDTO {
     private String uuid;
     private String userIdentifier;
     private String title;
+    private Boolean done;
+    private Integer stresss;
     private Integer progress;
-    private boolean done;
-    
+    private LocalDateTime deadline;
+    private LocalDateTime createdDate;
+    private LocalDateTime updatedDate;
+
     public TodoDTO(final TodoEntity entity) {
         this.uuid = entity.getUuid();
         this.userIdentifier = entity.getUserIdentifier();
         this.title = entity.getTitle();
+        this.done = entity.getDone();
+        this.stresss = entity.getStresss();
         this.progress = entity.getProgress();
-        this.done = entity.isDone();
+        this.deadline = entity.getDeadline();
+        this.createdDate = entity.getCreatedDate();
+        this.updatedDate = entity.getUpdatedDate();
     }
 
     public static TodoEntity toEntity(final TodoDTO dto) {
         return TodoEntity.builder()
-                        .uuid(dto.getUuid())
-                        .userIdentifier(dto.getUserIdentifier())
-                        .title(dto.getTitle())
-                        .progress(dto.getProgress())
-                        .done(dto.isDone())
-                        .build();
+                .uuid(dto.getUuid())
+                .userIdentifier(dto.getUserIdentifier())
+                .title(dto.getTitle())
+                .done(dto.getDone())
+                .stresss(dto.getStresss())
+                .progress(dto.getProgress())
+                .deadline(dto.getDeadline())
+                .build();
     }
 }
