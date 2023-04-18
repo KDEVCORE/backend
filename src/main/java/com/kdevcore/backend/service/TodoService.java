@@ -39,8 +39,10 @@ public class TodoService {
                     .userIdentifier(entity.getUserIdentifier())
                     .title(entity.getTitle())
                     .done(entity.getDone())
-                    .progress(entity.getProgress())
                     .stresss(entity.getStresss())
+                    .progress(entity.getProgress())
+                    .priority(entity.getPriority())
+                    .deadline(entity.getDeadline())
                     .build()); // 데이터베이스 반영
         }
         return retrieve(entity.getUserIdentifier());
