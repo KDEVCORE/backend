@@ -16,7 +16,7 @@ public class TodoDTO {
     private String userIdentifier;
     private String title;
     private Boolean done;
-    private Integer stresss;
+    private Integer stress;
     private Integer progress;
     private Integer priority;
     private LocalDateTime deadline;
@@ -28,7 +28,7 @@ public class TodoDTO {
         this.userIdentifier = entity.getUserIdentifier();
         this.title = entity.getTitle();
         this.done = entity.getDone();
-        this.stresss = entity.getStresss();
+        this.stress = entity.getStress();
         this.progress = entity.getProgress();
         this.priority = entity.getPriority();
         this.deadline = entity.getDeadline();
@@ -42,7 +42,7 @@ public class TodoDTO {
                 .userIdentifier(dto.getUserIdentifier())
                 .title(dto.getTitle())
                 .done(dto.getDone())
-                .stresss(dto.getStresss())
+                .stress(dto.getStress())
                 .progress(dto.getProgress())
                 .priority(dto.getPriority())
                 .deadline(dto.getDeadline())

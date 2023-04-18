@@ -39,7 +39,7 @@ public class TodoService {
                     .userIdentifier(entity.getUserIdentifier())
                     .title(entity.getTitle())
                     .done(entity.getDone())
-                    .stresss(entity.getStresss())
+                    .stress(entity.getStress())
                     .progress(entity.getProgress())
                     .priority(entity.getPriority())
                     .deadline(entity.getDeadline())

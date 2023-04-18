@@ -27,7 +27,7 @@ public class TodoEntity extends BaseDateTimeEntity {
     private String title;
     private Boolean done;
     private Integer progress;
-    private Integer stresss;
+    private Integer stress;
     private Integer priority;
     private LocalDateTime deadline;
 }

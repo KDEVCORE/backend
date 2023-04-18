@@ -21,8 +21,10 @@ import com.kdevcore.backend.service.TodoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Todo")
+@Slf4j
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
@@ -34,6 +36,7 @@ public class TodoController {
     public ResponseEntity<?> createTodo(@AuthenticationPrincipal String userIdentifier, @RequestBody TodoDTO dto) {
         try {
             dto.setUserIdentifier(userIdentifier);
+            log.info("Creating data: " + dto.toString());
             TodoEntity todo = TodoDTO.toEntity(dto);
             List<TodoEntity> entities = todoService.create(todo);
             List<TodoDTO> dtos = entities.stream().map(TodoDTO::new).collect(Collectors.toList());
@@ -50,7 +53,9 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<?> retrieveTodoList(@AuthenticationPrincipal String userIdentifier) {
         List<TodoEntity> entities = todoService.retrieve(userIdentifier);
+        log.info("Reading data(entity): " + entities.toString());
         List<TodoDTO> dtos = entities.stream().map(TodoDTO::new).collect(Collectors.toList());
+        log.info("Reading data(dto): " + dtos.toString());
         ResponseDTO<TodoDTO> response = ResponseDTO.<TodoDTO>builder().data(dtos).build();
         return ResponseEntity.ok().body(response);
     }
