@@ -36,7 +36,6 @@ public class TodoController {
     public ResponseEntity<?> createTodo(@AuthenticationPrincipal String userIdentifier, @RequestBody TodoDTO dto) {
         try {
             dto.setUserIdentifier(userIdentifier);
-            log.info("Creating data: " + dto.toString());
             TodoEntity todo = TodoDTO.toEntity(dto);
             List<TodoEntity> entities = todoService.create(todo);
             List<TodoDTO> dtos = entities.stream().map(TodoDTO::new).collect(Collectors.toList());
