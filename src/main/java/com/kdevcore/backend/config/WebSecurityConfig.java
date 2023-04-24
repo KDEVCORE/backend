@@ -33,7 +33,7 @@ public class WebSecurityConfig {
             .csrf((csrf) -> csrf.disable())
             .httpBasic((basic) -> basic.disable())
             .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/health", "/member/**", "/oauth2/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll().anyRequest().authenticated())
+            .authorizeHttpRequests((authorize) -> authorize.antMatchers("/", "/health", "/auth/**", "/oauth2/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll().anyRequest().authenticated())
             .oauth2Login((oauth) -> oauth.redirectionEndpoint().baseUri("/oauth2/callback/*").and()
                                     .authorizationEndpoint().baseUri("/oauth2/authorization").and()
                                     .userInfoEndpoint().userService(customOAuth2UserService).and()

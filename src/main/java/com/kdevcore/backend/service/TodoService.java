@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kdevcore.backend.model.TodoEntity;
 import com.kdevcore.backend.persistence.TodoRepository;
@@ -29,11 +30,12 @@ public class TodoService {
         return todoRepository.findByUserIdentifier(userIdentifier);
     }
 
+    @Transactional
     public List<TodoEntity> update(final TodoEntity entity) {
         validate(entity);
         final Optional<TodoEntity> original = todoRepository.findByUuid(entity.getUuid());
         if(original.isPresent()) {
-            todoRepository.save(
+            todoRepository.save( // 데이터베이스 반영
                 TodoEntity.builder()
                     .uuid(entity.getUuid())
                     .userIdentifier(entity.getUserIdentifier())
@@ -43,11 +45,13 @@ public class TodoService {
                     .progress(entity.getProgress())
                     .priority(entity.getPriority())
                     .deadline(entity.getDeadline())
-                    .build()); // 데이터베이스 반영
+                    .build()
+            );
         }
         return retrieve(entity.getUserIdentifier());
     }
 
+    @Transactional
     public List<TodoEntity> delete(final TodoEntity entity) {
         validate(entity);
         try {
