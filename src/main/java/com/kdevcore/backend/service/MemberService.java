@@ -19,7 +19,7 @@ public class MemberService {
     private UserRepository userRepository;
 
     public UserEntity create(final UserEntity userEntity) {
-        if(userEntity == null || userEntity.getIdentifier() == null) throw new RuntimeException("Invalid arguments");
+        if(userEntity == null || userEntity.getIdentifier().isBlank()) throw new RuntimeException("Invalid arguments");
         final String identifier = userEntity.getIdentifier();
         if(userRepository.existsByIdentifier(identifier)) {
             log.warn("ID already exists {}", identifier);
