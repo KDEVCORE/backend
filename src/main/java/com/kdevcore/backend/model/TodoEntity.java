@@ -1,6 +1,6 @@
 package com.kdevcore.backend.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,5 +29,5 @@ public class TodoEntity extends BaseDateTimeEntity {
     private Integer progress;
     private Integer priority;
     private Integer stress;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 }

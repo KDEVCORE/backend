@@ -1,5 +1,6 @@
 package com.kdevcore.backend.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.kdevcore.backend.model.TodoEntity;
@@ -19,7 +20,7 @@ public class TodoDTO {
     private Integer progress;
     private Integer priority;
     private Integer stress;
-    private LocalDateTime deadline;
+    private LocalDate deadline;
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
 
