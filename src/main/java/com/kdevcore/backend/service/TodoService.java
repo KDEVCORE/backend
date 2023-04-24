@@ -35,17 +35,17 @@ public class TodoService {
         validate(entity);
         final Optional<TodoEntity> original = todoRepository.findByUuid(entity.getUuid());
         if(original.isPresent()) {
-            todoRepository.save( // 데이터베이스 반영
+            todoRepository.save(
                 TodoEntity.builder()
-                    .uuid(entity.getUuid())
-                    .userIdentifier(entity.getUserIdentifier())
-                    .title(entity.getTitle())
-                    .done(entity.getDone())
-                    .stress(entity.getStress())
-                    .progress(entity.getProgress())
-                    .priority(entity.getPriority())
-                    .deadline(entity.getDeadline())
-                    .build()
+                .uuid(entity.getUuid())
+                .userIdentifier(entity.getUserIdentifier())
+                .title(entity.getTitle())
+                .done(entity.getDone())
+                .stress(entity.getStress())
+                .progress(entity.getProgress())
+                .priority(entity.getPriority())
+                .deadline(entity.getDeadline())
+                .build()
             );
         }
         return retrieve(entity.getUserIdentifier());

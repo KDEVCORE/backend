@@ -52,13 +52,11 @@ public class TodoController {
     @GetMapping
     public ResponseEntity<?> retrieveTodoList(@AuthenticationPrincipal String userIdentifier) {
         List<TodoEntity> entities = todoService.retrieve(userIdentifier);
-        log.info("Reading data(entity): " + entities.toString());
         List<TodoDTO> dtos = entities.stream().map(TodoDTO::new).collect(Collectors.toList());
-        log.info("Reading data(dto): " + dtos.toString());
         ResponseDTO<TodoDTO> response = ResponseDTO.<TodoDTO>builder().data(dtos).build();
         return ResponseEntity.ok().body(response);
     }
-
+    
     @Operation(summary = "Todo item modification process handling", description = "할 일 목록 수정 처리")
     @PutMapping
     public ResponseEntity<?> updateTodo(@AuthenticationPrincipal String userIdentifier, @RequestBody TodoDTO dto) {
