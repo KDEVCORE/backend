@@ -30,10 +30,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             String token = parseBearerToken(request);
-            log.info("Token check, {}", token);
             if (token != null && !token.equalsIgnoreCase("null")) {
                 String userIdentifier = jwtProvider.validateAndGetUserId(token);
-                log.info("Autenticated user ID: " + userIdentifier);
+                log.info("[Autenticated] User ID: " + userIdentifier + ", Token: " + token);
                 AbstractAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userIdentifier, null, AuthorityUtils.NO_AUTHORITIES);
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
