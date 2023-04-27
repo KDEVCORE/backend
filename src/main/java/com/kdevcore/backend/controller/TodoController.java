@@ -21,10 +21,8 @@ import com.kdevcore.backend.service.TodoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.slf4j.Slf4j;
 
 @Tag(name = "Todo")
-@Slf4j
 @RestController
 @RequestMapping("/todo")
 public class TodoController {
