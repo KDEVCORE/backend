@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 @OpenAPIDefinition(
     info = @Info(
@@ -17,12 +16,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
         contact = @Contact(
                     name = "developer (kdevcore)",
                     email = "kdevcore@gmail.com")
-    ),
-    tags = {
-        @Tag(name = "Member", description = "Member process"),
-        @Tag(name = "Todo", description = "Todo process"),
-        @Tag(name = "Undefined", description = "Undefined process"),
-    }
+    )
 )
 @EnableJpaAuditing
 @SpringBootApplication

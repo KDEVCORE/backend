@@ -19,7 +19,7 @@ import com.kdevcore.backend.service.MemberService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Member")
+@Tag(name = "Member", description = "A controller that processes member information")
 @RestController
 @RequestMapping("/member")
 public class MemberController {

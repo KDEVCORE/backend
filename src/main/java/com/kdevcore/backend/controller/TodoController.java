@@ -22,7 +22,7 @@ import com.kdevcore.backend.service.TodoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Todo")
+@Tag(name = "Todo", description = "A controller that handles the todo data")
 @RestController
 @RequestMapping("/todo")
 public class TodoController {

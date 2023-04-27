@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-@Tag(name = "Health Check")
+@Tag(name = "Health Check", description = "A controller that checks server status")
 @RestController
 public class HealthCheckController {
     @Operation(summary = "Check running server", description = "서버가 실행중인지 확인하는 용도")

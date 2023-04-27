@@ -19,7 +19,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 
-@Tag(name = "Authentication")
+@Tag(name = "Authentication", description = "A controller that handles authentication")
 @Slf4j
 @RestController
 @RequestMapping("/auth")
