@@ -22,4 +22,4 @@ SSO 로그인
 ## Result
 - URL
   - Back-End: https://api.kdevcore.com/swagger-ui/index.html
-  - Front-End: https://app.kdevcore.com
+  - Front-End: https://demo.kdevcore.com
