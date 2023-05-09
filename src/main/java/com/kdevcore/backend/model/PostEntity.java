@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReportEntity extends BaseDateTimeEntity {
+public class PostEntity extends BaseDateTimeEntity {
     @Id
     @GeneratedValue(generator="system-uuid") // ID 자동 생성, 기본 Generator: INCREMENTAL, SEQUENCE, IDENTITY
     @GenericGenerator(name="system-uuid", strategy = "uuid") // Custom Generator 설정

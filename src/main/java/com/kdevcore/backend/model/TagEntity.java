@@ -20,10 +20,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = "name")})
 public class TagEntity extends BaseDateTimeEntity {
-    @Id
-    @GeneratedValue(generator="system-uuid") // ID 자동 생성, 기본 Generator: INCREMENTAL, SEQUENCE, IDENTITY
-    @GenericGenerator(name="system-uuid", strategy = "uuid") // Custom Generator 설정
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String uuid;
+    @Id
     private String name;
-    private String reportUuid;
+    private Integer count;
 }
